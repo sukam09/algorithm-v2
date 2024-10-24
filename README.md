@@ -1,2 +1,1 @@
-# algorithm-js
-Only JS
+# algorithm
