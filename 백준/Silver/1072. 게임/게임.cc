@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 
-long long x, y;
-int z;
+ll x, y, z;
 
-int solve(long long k) {
-  long long p = (y + k) * 100 / (x + k);
+int solve(ll k) {
+  ll p = (y + k) * 100 / (x + k);
   return p > z;
 }
 
@@ -14,19 +14,15 @@ int main() {
   cin.tie(0);
   cin >> x >> y;
   z = y * 100 / x;
-  if (z >= 99) {
-    cout << -1;
-    return 0;
-  }
-  long long st = 1;
-  long long en = 1000000000;
+  ll st = 1;
+  ll en = 1000000001;
   while (st < en) {
-    int mid = (st + en) / 2;
+    ll mid = (st + en) / 2;
     if (solve(mid)) {
       en = mid;
     } else {
       st = mid + 1;
     }
   }
-  cout << en;
+  cout << (en == 1000000001 ? -1 : en);
 }
