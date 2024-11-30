@@ -1,10 +1,11 @@
-const selectionSort = () => {
-  for (let i = 0; i < n; i++) {
-    let mnidx = i;
-    for (let j = i + 1; j < n; j++) {
-      if (arr[j] < arr[mnidx]) mnidx = j;
+const insertionSort = () => {
+  for (let i = 1; i < n; i++) {
+    const key = arr[i];
+    let j = i - 1;
+    for (; j >= 0 && arr[j] > key; j--) {
+      arr[j + 1] = arr[j];
     }
-    swap(i, mnidx);
+    arr[j + 1] = key;
   }
 };
 
@@ -22,7 +23,7 @@ const arr = Array(n);
 for (let i = 1; i <= n; i++) {
   arr[i - 1] = input[i];
 }
-selectionSort();
+insertionSort();
 let ans = '';
 for (let i = 0; i < n; i++) {
   ans += arr[i] + '\n';
