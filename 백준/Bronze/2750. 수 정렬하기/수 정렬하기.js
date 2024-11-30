@@ -1,8 +1,10 @@
-const bubbleSort = () => {
+const selectionSort = () => {
   for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n - 1 - i; j++) {
-      if (arr[j] > arr[j + 1]) swap(j, j + 1);
+    let mnidx = i;
+    for (let j = i + 1; j < n; j++) {
+      if (arr[j] < arr[mnidx]) mnidx = j;
     }
+    swap(i, mnidx);
   }
 };
 
@@ -20,7 +22,7 @@ const arr = Array(n);
 for (let i = 1; i <= n; i++) {
   arr[i - 1] = input[i];
 }
-bubbleSort();
+selectionSort();
 let ans = '';
 for (let i = 0; i < n; i++) {
   ans += arr[i] + '\n';
