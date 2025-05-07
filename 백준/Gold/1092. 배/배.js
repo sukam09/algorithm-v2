@@ -14,13 +14,7 @@ let i = 0;
 let j = 0;
 let ans = 1;
 while (1) {
-  if (i === n) {
-    i = 0;
-    j = 0;
-    ans++;
-    continue;
-  }
-  if (j === m) {
+  if (i === n || j === m) {
     i = 0;
     j = 0;
     ans++;
@@ -32,7 +26,7 @@ while (1) {
     b.splice(j, 1);
     // console.log(ans, b);
     if (b.length === 0) break;
-    if (j === b.length) j = b.length - 1;
+    // if (j === b.length) j = b.length - 1;
   } else if (i === 0) {
     // 다음 차례로 넘어갔는데 첫번째 크레인부터 안될 경우
     break;
