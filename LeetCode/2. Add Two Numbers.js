@@ -11,7 +11,7 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-  let l3 = new ListNode();
+  const l3 = new ListNode();
   let p3 = l3;
 
   let carry = 0;
