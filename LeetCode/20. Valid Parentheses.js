@@ -11,18 +11,16 @@ var isValid = function (s) {
   };
 
   for (const char of s) {
-    if (Object.keys(bracketMap).includes(char)) {
+    if (char in bracketMap) {
       stack.push(char);
     } else {
       if (stack.length === 0) {
         return false;
       }
-      const top = stack[stack.length - 1];
-      const pair = bracketMap[top];
-      if (char !== pair) {
+      const top = stack.pop();
+      if (bracketMap[top] !== char) {
         return false;
       }
-      stack.pop();
     }
   }
   return stack.length === 0;

@@ -3,25 +3,20 @@
  * @return {string[][]}
  */
 var groupAnagrams = function (strs) {
-  const anagramMap = new Map();
+  const anagramGroups = {};
 
-  const strSort = s => {
-    return [...s].sort().join('');
+  const strSort = str => {
+    return [...str].sort().join('');
   };
 
   for (const str of strs) {
     const key = strSort(str);
-    if (anagramMap.has(key)) {
-      anagramMap.get(key).push(str);
+    if (key in anagramGroups) {
+      anagramGroups[key].push(str);
     } else {
-      anagramMap.set(key, [str]);
+      anagramGroups[key] = [str];
     }
   }
 
-  const anagramKeys = anagramMap.keys();
-  const anagramGroups = [];
-  for (const anagramKey of anagramKeys) {
-    anagramGroups.push(anagramMap.get(anagramKey));
-  }
-  return anagramGroups;
+  return Object.values(anagramGroups);
 };

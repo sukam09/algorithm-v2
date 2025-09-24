@@ -4,27 +4,25 @@
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-  const combinations = new Set();
+  const combinations = [];
 
-  const backtrack = (sum, combination) => {
-    if (sum === target) {
-      const key = combination.sort((a, b) => a - b).join(',');
-      if (!combinations.has(key)) {
-        combinations.add(key);
-      }
+  const backtrack = (startIndex, currentSum, combination) => {
+    if (currentSum === target) {
+      combinations.push([...combination]);
       return;
     }
 
-    for (const candidate of candidates) {
-      if (sum + candidate <= target) {
-        backtrack(sum + candidate, [...combination, candidate]);
-      }
+    if (currentSum > target) {
+      return;
+    }
+
+    for (let i = startIndex; i < candidates.length; i++) {
+      combination.push(candidates[i]);
+      backtrack(i, currentSum + candidates[i], combination);
+      combination.pop();
     }
   };
 
-  backtrack(0, []);
-
-  return [...combinations].map(combination =>
-    combination.split(',').map(num => Number(num))
-  );
+  backtrack(0, 0, []);
+  return combinations;
 };

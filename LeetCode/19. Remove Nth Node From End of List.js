@@ -11,26 +11,20 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-  let sz = 0;
-  let currentNode = head;
-  while (currentNode !== null) {
-    sz++;
-    currentNode = currentNode.next;
+  const dummy = new ListNode(0, head);
+  let slow = dummy;
+  let fast = dummy;
+
+  for (let i = 0; i <= n; i++) {
+    fast = fast.next;
   }
-  let targetCount = sz - n + 1;
-  if (targetCount === 1) {
-    return head.next;
+
+  while (fast !== null) {
+    slow = slow.next;
+    fast = fast.next;
   }
-  let count = 1;
-  currentNode = head;
-  while (currentNode !== null) {
-    if (count === targetCount - 1) {
-      // next node is target node
-      currentNode.next = currentNode.next.next;
-      break;
-    }
-    currentNode = currentNode.next;
-    count++;
-  }
-  return head;
+
+  slow.next = slow.next.next;
+
+  return dummy.next;
 };

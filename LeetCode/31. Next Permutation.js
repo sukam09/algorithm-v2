@@ -38,36 +38,38 @@ var nextPermutation = function (nums) {
     ...
     4 3 2 1
   */
+  const swap = (i, j) => {
+    [nums[i], nums[j]] = [nums[j], nums[i]];
+  };
 
-  let target1 = -1;
-  for (let i = nums.length - 1; i >= 1; i--) {
-    if (nums[i] > nums[i - 1]) {
-      target1 = i - 1;
+  const reverse = (start, end) => {
+    while (start < end) {
+      swap(start, end);
+      start++;
+      end--;
+    }
+  };
+
+  let pivotIndex = -1;
+
+  for (let i = nums.length - 2; i >= 0; i--) {
+    if (nums[i] < nums[i + 1]) {
+      pivotIndex = i;
       break;
     }
   }
 
-  // last permutation
-  if (target1 === -1) {
-    nums.sort((a, b) => a - b);
-    return nums;
+  if (pivotIndex === -1) {
+    reverse(0, nums.length - 1);
+    return;
   }
 
-  let target2 = -1;
-  let target2Val = 101;
-  for (let i = target1 + 1; i < nums.length; i++) {
-    if (nums[i] > nums[target1] && nums[i] < target2Val) {
-      target2 = i;
-      target2Val = nums[i];
+  for (let i = nums.length - 1; i > pivotIndex; i--) {
+    if (nums[i] > nums[pivotIndex]) {
+      swap(pivotIndex, i);
+      break;
     }
   }
 
-  [nums[target1], nums[target2]] = [nums[target2], nums[target1]];
-  const result = [
-    ...nums.slice(0, target1 + 1),
-    ...nums.slice(target1 + 1).sort((a, b) => a - b),
-  ];
-  for (let i = 0; i < nums.length; i++) {
-    nums[i] = result[i];
-  }
+  reverse(pivotIndex + 1, nums.length - 1);
 };
