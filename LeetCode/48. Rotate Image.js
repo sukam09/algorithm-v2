@@ -4,45 +4,23 @@
  */
 var rotate = function (matrix) {
   const n = matrix.length;
-  let row = 0;
-  let rowEnd = n - 1;
-  let left = 0;
-  let right = n - 1;
-
-  while (left <= right) {
-    const top = [];
-    for (let j = left; j <= right; j++) {
-      top.push(matrix[row][j]);
+  let k = 0;
+  let l = n;
+  /*
+    5 -> 15 -> 16 -> 11
+    2 -> 14 -> 7 -> 9
+    start: k
+    end: k + l - 1
+  */
+  while (l > 1) {
+    for (let offset = 0; offset < l - 1; offset++) {
+      const topleft = matrix[k + offset][k];
+      matrix[k + offset][k] = matrix[k + l - 1][k + offset];
+      matrix[k + l - 1][k + offset] = matrix[k + l - 1 - offset][k + l - 1];
+      matrix[k + l - 1 - offset][k + l - 1] = matrix[k][k + l - 1 - offset];
+      matrix[k][k + l - 1 - offset] = topleft;
     }
-
-    let originalRow = rowEnd;
-    for (let j = left; j <= right; j++) {
-      matrix[row][j] = matrix[originalRow--][left];
-    }
-
-    let originalCol = right;
-    for (let i = rowEnd; i >= row; i--) {
-      matrix[i][left] = matrix[rowEnd][originalCol--];
-    }
-
-    originalRow = row;
-    for (let j = right; j >= left; j--) {
-      matrix[rowEnd][j] = matrix[originalRow++][right];
-    }
-
-    let index = 0;
-    for (let i = row; i <= rowEnd; i++) {
-      matrix[i][right] = top[index++];
-    }
-
-    [matrix[row][left], matrix[rowEnd][left]] = [
-      matrix[rowEnd][left],
-      matrix[row][left],
-    ];
-
-    row++;
-    rowEnd--;
-    left++;
-    right--;
+    k++;
+    l -= 2;
   }
 };
