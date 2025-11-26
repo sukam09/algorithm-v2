@@ -36,14 +36,11 @@ const input = require('fs')
   .trim()
   .split('\n')
   .map(v => v.split(' ').map(Number));
-// console.log(input);
 const n = input[0][0];
 const m = input[3][0];
 const a = input[1];
 const b = input[2];
 const c = input[4];
-
-// console.log(n, m, a, b, c);
 
 const q = new Queue();
 for (let i = n - 1; i >= 0; i--) {
@@ -52,12 +49,12 @@ for (let i = n - 1; i >= 0; i--) {
   }
 }
 
-let ans = '';
+const ans = [];
 
 for (let i = 0; i < m; i++) {
   q.push(c[i]);
-  ans += q.front() + ' ';
+  ans.push(q.front());
   q.pop();
 }
 
-console.log(ans);
+console.log(ans.join(' '));
