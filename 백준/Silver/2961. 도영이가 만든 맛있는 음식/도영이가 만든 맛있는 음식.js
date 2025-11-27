@@ -7,14 +7,10 @@ const input = require('fs')
 const arr = input.slice(1);
 const n = input[0][0];
 
-// console.log(n, arr);
-
 let ans = Infinity;
-const vis = Array(n).fill(0);
 let started = 0;
 
 const backtrack = (k, s, b) => {
-  // console.log(k, s, b, vis);
   if (!started) {
     started = 1;
   } else {
@@ -25,12 +21,7 @@ const backtrack = (k, s, b) => {
     return;
   }
   for (let i = k; i < n; i++) {
-    if (vis[i]) {
-      continue;
-    }
-    vis[i] = 1;
     backtrack(i + 1, s * arr[i][0], b + arr[i][1]);
-    vis[i] = 0;
   }
 };
 
