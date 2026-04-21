@@ -3,9 +3,7 @@ function solution(keymap, targets) {
     const map = new Map();
     for (const k of keymap) {
         for (let i = 0; i < k.length; i++) {
-            if (!map.has(k[i])) {
-                map.set(k[i], i + 1);
-            } else if (i + 1 < map.get(k[i])) {
+            if (!map.has(k[i]) || i + 1 < map.get(k[i])) {
                 map.set(k[i], i + 1);
             }
         }
