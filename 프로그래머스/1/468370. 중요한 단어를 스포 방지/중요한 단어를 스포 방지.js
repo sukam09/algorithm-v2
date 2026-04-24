@@ -27,9 +27,9 @@ function solution(message, spoiler_ranges) {
             }
         }
     }
-    if (opened) {
-        set1.add(arr[idx]);
-    }
+    // if (opened) {
+    //     set1.add(arr[idx]);
+    // }
     
     for (const [st, en] of spoiler_ranges) {
         const temp = new Set();
